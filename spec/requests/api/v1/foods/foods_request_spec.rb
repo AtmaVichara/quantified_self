@@ -94,4 +94,21 @@ describe "Foods Endpoint" do
       expect(response.status).to be(400)
     end
   end
+
+  context "DELETE /api/v1/foods/:id" do
+    it "delete food" do
+      create(:food, name: "Cheese")
+      create(:food, name: "Not Cheese")
+
+      delete '/api/v1/foods/2'
+
+      expect(response).to be_success
+      expect(Food.count).to eq(1)
+      expect(response.status).to be(204)
+
+      delete '/api/v1/foods/3'
+
+      expect(response.status).to be(400)
+    end
+  end
 end
