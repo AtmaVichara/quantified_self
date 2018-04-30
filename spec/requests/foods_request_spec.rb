@@ -10,13 +10,12 @@ describe "Foods Endpoint" do
       expect(response).to be_success
 
       foods = JSON.parse(response.body)
-
       expect(foods.count).to eq(10)
       foods.each do |food|
         expect(food).to be_a(Hash)
-        expect(food[:name]).to_not exist
-        expect(food[:calories]).to_not exist
-      end 
+        expect(food["name"]).to_not be(nil)
+        expect(food["calories"]).to be_a(Integer)
+      end
     end
   end
 end
