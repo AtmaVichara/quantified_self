@@ -9,5 +9,5 @@ require 'csv'
 Food.destroy_all
 OPTIONS = {headers: true, header_converters: :symbol }
 CSV.foreach('db/data/food.csv', OPTIONS) do |row|
-  Food.create!(name: row[:food], calories: row[:calories].to_i)
+  Food.create!(name: row[:food], calories: row[:calories])
 end
