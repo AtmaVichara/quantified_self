@@ -12,5 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+coverage/
+.DS_Store
 
 .byebug_history
