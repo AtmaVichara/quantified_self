@@ -18,4 +18,18 @@ describe "Foods Endpoint" do
       end
     end
   end
+
+  context "GET /api/v1/foods/:id" do
+    it "returns selected food" do
+      create(:food, name: 'Cheese', calories: 110)
+
+      get '/api/v1/foods/1'
+
+      expect(response).to be_success
+
+      food = JSON.parse(response.body)
+      expect(food["name"]).to eq("Cheese")
+      expect(food["calories"]).to eq(110)
+    end
+  end
 end
