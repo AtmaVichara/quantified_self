@@ -62,4 +62,36 @@ describe "Foods Endpoint" do
       expect(response.status).to be(400)
     end
   end
+
+  context "PATCH /api/v1/foods/:id" do
+    it "updates food" do
+      create(:food, name: 'Not Cheese', calories: "0")
+      food = { "name" => "Cheese", "calories" => "110"}
+
+      patch '/api/v1/foods/1', params: {'food' => food}
+
+      expect(response).to be_success
+      new_food = JSON.parse(response.body)
+
+      expect(new_food["name"]).to eq(food["name"])
+      expect(new_food["calories"]).to eq(food["calories"])
+    end
+
+    it "returns 400 error" do
+      create(:food)
+      food = {"calories" => '110'}
+
+      patch '/api/v1/foods/2', params: {'food' => food }
+
+      expect(response).to_not be_success
+      expect(response.status).to be(400)
+
+      name = {"name" => 'something'}
+
+      patch '/api/v1/foods/2', params: {'food' => name }
+
+      expect(response).to_not be_success
+      expect(response.status).to be(400)
+    end
+  end
 end
