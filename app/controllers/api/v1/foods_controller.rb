@@ -27,6 +27,19 @@ class Api::V1::FoodsController < ApplicationController
       end
     rescue ActiveRecord::RecordNotFound
       render status: 400
+    end
+  end
+
+  def destroy
+    begin
+      food = Food.find(params[:id])
+      if food.destroy
+        render status: 204
+      else
+        render status: 400
+      end
+    rescue ActiveRecord::RecordNotFound
+      render status: 400
     end 
   end
 
