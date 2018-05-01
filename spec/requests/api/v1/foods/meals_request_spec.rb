@@ -53,6 +53,7 @@ describe "Meals Request Endpoint" do
       expect(response.status).to eq(404)
     end
   end
+
   context "POST /api/v1/meals/:meal_id/foods/:is" do
     it "creates food and associateds it with the meal" do
       food = create(:food)
