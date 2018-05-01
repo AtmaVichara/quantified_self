@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :foods
-      resources :meals, except: [:show]
-      get '/meals/:id/foods', to: 'meals#show'
-      post "/meals/:meal_id/foods/:id", to: "meals#create"
-      delete "/meals/:meal_id/foods/:id", to: "meals#destroy"
+      resources :meals, only: [:index]
+      namespace :meals, path: 'meals/:meal_id' do
+        resources :foods, only: [:index]
+        post '/foods/:id', to: 'foods#create'
+        delete '/foods/:id', to: 'foods#destroy'
+      end
     end
   end
 end
